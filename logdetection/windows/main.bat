@@ -51,6 +51,7 @@ powershell Invoke-WebRequest -Uri "https://raw.githubusercontent.com/BoredHacker
 
 copy /y winlogbeat.yml winlogbeat\winlogbeat-7.15.1-windows-x86_64\winlogbeat.yml
 
+cd C:\loggingsetup\winlogbeat\winlogbeat-7.15.1-windows-x86_64\
 powerShell -ExecutionPolicy UnRestricted -File .\install-service-winlogbeat.ps1
 
 rem reboot
