@@ -11,7 +11,7 @@ winlogbeat.event_logs:
     event_id: 5857,5858,5859,5860,5861
 
 output.elasticsearch:
-  hosts: ["http://10.2.96.5:8080/api/v1/ingest/elastic-bulk"]
+  hosts: ["http://10.2.96.4:8080/api/v1/ingest/elastic-bulk"]
   password: "abcdabcdabcdabcd"
   compression_level: 5
   bulk_max_size: 200
