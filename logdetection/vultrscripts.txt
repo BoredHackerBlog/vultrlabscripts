@@ -1,0 +1,11 @@
+ubuntu script
+#!/bin/sh
+
+wget https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/logdetection/ubuntu/main.sh
+
+bash main.sh
+
+
+windows script
+curl https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/logdetection/windows/main.bat -o main.bat
+main.bat
