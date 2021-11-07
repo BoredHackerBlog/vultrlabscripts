@@ -33,7 +33,7 @@ auditpol.exe /set /Category:* /failure:enable
 rem create an smb share
 powershell New-Item C:\Shares\ -ItemType Directory
 powershell New-Item C:\Shares\SharedFiles -ItemType Directory
-powershell New-SMBShare –Name SharedFiles –Path C:\Shares\SharedFiles
+powershell New-SMBShare -Name SharedFiles -Path C:\Shares\SharedFiles
 
 rem setup sysmon
 powershell Invoke-WebRequest -Uri "https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml" -OutFile "sysmonconfig.xml"
