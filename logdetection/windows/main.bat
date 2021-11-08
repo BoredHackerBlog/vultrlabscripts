@@ -1,6 +1,3 @@
-rem assign ip to private network
-netsh interface ip set address name="Ethernet 2" static 10.2.96.5 255.255.255.0 0.0.0.0 1
-
 rem disable updates
 sc config wuauserv start= disabled
 net stop wuauserv
@@ -53,6 +50,11 @@ copy /y winlogbeat.yml winlogbeat\winlogbeat-7.15.1-windows-x86_64\winlogbeat.ym
 
 cd C:\loggingsetup\winlogbeat\winlogbeat-7.15.1-windows-x86_64\
 powerShell -ExecutionPolicy UnRestricted -File .\install-service-winlogbeat.ps1
+
+rem assign ip to private network
+cd C:\
+powershell Invoke-WebRequest -Uri "https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/logdetection/windows/changeip.ps1" -OutFile "changeip.ps1"
+powerShell -ExecutionPolicy UnRestricted -File changeip.ps1
 
 rem reboot
 shutdown /r /t 0
