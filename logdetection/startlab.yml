@@ -3,6 +3,16 @@
 - name: setup the lab
   hosts: localhost
   tasks:
+    - name: setup ubuntu script
+      ngine_io.vultr.vultr_startup_script:
+        name: logdetection_ubuntu
+        script: "#!/bin/sh\nwget https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/logdetection/ubuntu/main.sh\nbash main.sh"
+
+    - name: setup windows script
+      ngine_io.vultr.vultr_startup_script:
+        name: logdetection_windows
+        script: "curl https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/logdetection/windows/main.bat -o main.bat\nmain.bat"
+
     - name: setup firewall group
       ngine_io.vultr.vultr_firewall_group:
         name: vultrlab
