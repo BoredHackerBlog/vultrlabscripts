@@ -1,0 +1,53 @@
+---
+# VULTR_API_KEY="API KEY" ansible-playbook startlab.yml --extra-vars="src_ip=USERS IP"
+- name: setup the lab
+  hosts: localhost
+  tasks:
+    - name: setup firewall group
+      ngine_io.vultr.vultr_firewall_group:
+        name: vultrlab
+
+    - name: setup firewall rule
+      ngine_io.vultr.vultr_firewall_rule:
+        group: vultrlab
+        protocol: tcp
+        start_port: 1
+        end_port: 65535
+        cidr: "{{ src_ip }}/32"
+
+    - name: create ubuntu instance
+      ngine_io.vultr.vultr_server:
+        name: ubuntuserver
+        os: Ubuntu 20.04 x64
+        plan: 4096 MB RAM,80 GB SSD,3.00 TB BW
+        region: Chicago
+        private_network_enabled: yes
+        firewall_group: vultrlab
+        startup_script: logdetection_ubuntu
+        state: present
+      register: ubuntuoutput
+
+    # this takes a few seconds
+    - name: create windows instance
+      ngine_io.vultr.vultr_server:
+        name: winworkstation
+        os: Windows 2019 x64
+        plan: 4096 MB RAM,80 GB SSD,3.00 TB BW
+        region: Chicago
+        private_network_enabled: yes
+        firewall_group: vultrlab
+        startup_script: logdetection_windows
+        state: present
+      register: winoutput
+
+    - name: print info
+      debug:
+        msg:
+        - "Ubuntu is located at {{ ubuntuoutput.vultr_server.v4_main_ip }}"
+        - "Ubuntu Username: root Password: {{ ubuntuoutput.vultr_server.default_password }}"
+        - "Access Ubuntu via SSH or Humio on port 8080"
+        - "-----------------------------------------------"
+        - "Windows is located at {{ winoutput.vultr_server.v4_main_ip }}"
+        - "Windows Username: Administrator Password: {{ winoutput.vultr_server.default_password }}"
+        - "Access Windows via RDP"
+        - "-----------------------------------------------"
