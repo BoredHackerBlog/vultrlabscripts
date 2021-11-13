@@ -8,7 +8,6 @@ netsh advfirewall set allprofiles state off
 rem disable defender
 powershell Set-MpPreference -DisableRealtimeMonitoring $true
 powershell Add-MpPreference -ExclusionPath C:\
-powershell Uninstall-WindowsFeature -Name Windows-Defender
 
 rem assign ip to private network
 cd C:\

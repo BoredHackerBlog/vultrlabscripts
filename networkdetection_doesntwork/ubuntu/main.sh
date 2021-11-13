@@ -18,7 +18,7 @@ docker run -d --rm -it --name suricata --net=host --cap-add=net_admin --cap-add=
 
 docker run -d --rm -it --name evebox -v $(pwd)/logs:/var/log/suricata:ro -v $(pwd)/evebox:/evebox -p 5636:5636 jasonish/evebox:latest -D /evebox/ --datastore sqlite --input /var/log/suricata/eve.json
 
-sleep 15
+sleep 30
 docker exec -it --user suricata suricata suricata-update update-sources
 docker exec -it --user suricata suricata suricata-update enable-source oisf/trafficid
 docker exec -it --user suricata suricata suricata-update enable-source et/open
