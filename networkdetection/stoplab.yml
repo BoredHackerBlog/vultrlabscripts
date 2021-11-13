@@ -1,0 +1,20 @@
+---
+# VULTR_API_KEY="API KEY" ansible-playbook stoplab.yml
+# remove the firewall group and stop the lab machines
+- name: stop the lab
+  hosts: localhost
+  tasks:
+    - name: remove ubuntu instance
+      ngine_io.vultr.vultr_server:
+        name: ubuntuserver
+        state: absent
+
+    - name: remove windows instance
+      ngine_io.vultr.vultr_server:
+        name: winworkstation
+        state: absent
+
+    - name: remove firewall group
+      ngine_io.vultr.vultr_firewall_group:
+        name: vultrlab
+        state: absent
