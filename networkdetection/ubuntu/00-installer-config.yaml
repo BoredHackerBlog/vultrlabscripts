@@ -1,7 +1,5 @@
 network:
   ethernets:
-    ens3:
-      dhcp4: true
     enp6s0:
       addresses:
       - 10.2.96.4/24
