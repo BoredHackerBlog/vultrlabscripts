@@ -33,7 +33,7 @@
         region: Chicago
         private_network_enabled: yes
         firewall_group: vultrlab
-        startup_script: logdetection_ubuntu
+        startup_script: networkdetection_ubuntu
         state: present
       register: ubuntuoutput
 
@@ -46,7 +46,7 @@
         region: Chicago
         private_network_enabled: yes
         firewall_group: vultrlab
-        startup_script: logdetection_windows
+        startup_script: networkdetection_windows
         state: present
       register: winoutput
 
