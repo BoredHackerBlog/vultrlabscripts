@@ -7,11 +7,6 @@ ip addr add dev docker0 172.17.0.1/16
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 
-#setup docker compose
-curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
 #setup networking
 wget https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/networkdetection/ubuntu/00-installer-config.yaml -O /etc/netplan/00-installer-config.yaml
 netplan apply
