@@ -19,8 +19,10 @@ netplan apply
 #setup suricata
 mkdir suricata
 cd suricata
-wget https://raw.githubusercontent.com/BoredHackerBlog/vultrlabscripts/main/networkdetection/ubuntu/docker-compose.yml
-docker-compose up -d
+docker run -d --rm -it --name suricata --net=host --cap-add=net_admin --cap-add=sys_nice -v $(pwd)/logs:/var/log/suricata jasonish/suricata:latest -i enp6s0
+
+docker run -d --rm -it --name evebox -v $(pwd)/logs:/var/log/suricata:ro -v $(pwd)/evebox:/evebox -p 5636:5636 jasonish/evebox:latest -D /evebox/ --datastore sqlite --input /var/log/suricata/eve.json
+
 sleep 15
 docker exec -it --user suricata suricata suricata-update update-sources
 docker exec -it --user suricata suricata suricata-update enable-source oisf/trafficid
@@ -29,4 +31,5 @@ docker exec -it --user suricata suricata suricata-update enable-source ptresearc
 docker exec -it --user suricata suricata suricata-update enable-source sslbl/ssl-fp-blacklist
 docker exec -it --user suricata suricata suricata-update enable-source tgreen/hunting
 docker exec -it --user suricata suricata suricata-update --no-test
+
 
